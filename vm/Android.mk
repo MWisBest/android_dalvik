@@ -46,7 +46,6 @@ include $(LOCAL_PATH)/ReconfigureDvm.mk
 # Overwrite default settings
 LOCAL_MODULE := libdvm
 LOCAL_CFLAGS += $(target_smp_flag)
-LOCAL_CLANG := true
 
 # Define WITH_ADDRESS_SANITIZER to build an ASan-instrumented version of the
 # library in /system/lib/asan/libdvm.so.
@@ -69,7 +68,6 @@ LOCAL_CFLAGS += -UNDEBUG -DDEBUG=1 -DLOG_NDEBUG=1 -DWITH_DALVIK_ASSERT \
 # TODO: split out the asflags.
 LOCAL_ASFLAGS := $(LOCAL_CFLAGS)
 LOCAL_MODULE := libdvm_assert
-LOCAL_CLANG := true
 include $(BUILD_SHARED_LIBRARY)
 
 ifneq ($(dvm_arch),mips)    # MIPS support for self-verification is incomplete
@@ -82,7 +80,6 @@ ifneq ($(dvm_arch),mips)    # MIPS support for self-verification is incomplete
     # TODO: split out the asflags.
     LOCAL_ASFLAGS := $(LOCAL_CFLAGS)
     LOCAL_MODULE := libdvm_sv
-    LOCAL_CLANG := true
     include $(BUILD_SHARED_LIBRARY)
 
 endif # dvm_arch!=mips
@@ -95,7 +92,6 @@ LOCAL_CFLAGS += $(target_smp_flag)
 # TODO: split out the asflags.
 LOCAL_ASFLAGS := $(LOCAL_CFLAGS)
 LOCAL_MODULE := libdvm_interp
-LOCAL_CLANG := true
 include $(BUILD_SHARED_LIBRARY)
 
 
@@ -143,7 +139,6 @@ ifeq ($(WITH_HOST_DALVIK),true)
     LOCAL_ASFLAGS := $(LOCAL_CFLAGS)
     LOCAL_MODULE_TAGS := optional
     LOCAL_MODULE := libdvm
-    LOCAL_CLANG := true
 
     include $(BUILD_HOST_SHARED_LIBRARY)
 
@@ -153,7 +148,6 @@ ifeq ($(WITH_HOST_DALVIK),true)
     LOCAL_MODULE_TAGS := optional
     LOCAL_MODULE_CLASS := EXECUTABLES
     LOCAL_MODULE := dalvik
-    LOCAL_CLANG := true
     include $(BUILD_SYSTEM)/base_rules.mk
 $(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/dalvik | $(ACP)
 	@echo "Copy: $(PRIVATE_MODULE) ($@)"
