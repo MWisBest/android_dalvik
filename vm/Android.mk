@@ -45,12 +45,6 @@ include $(LOCAL_PATH)/ReconfigureDvm.mk
 
 # Overwrite default settings
 LOCAL_MODULE := libdvm
-ifeq ($(combo_target),TARGET_) # Workaround GCC 4.9 not being able to compile this ("internal compiler error: Segmentation fault")
-    ifeq ($(TARGET_ARCH),arm)
-        LOCAL_CC := $(TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8-linaro/bin/arm-linux-androideabi-gcc
-        LOCAL_CXX := $(TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8-linaro/bin/arm-linux-androideabi-g++
-    endif
-endif
 LOCAL_CFLAGS += $(target_smp_flag)
 
 # Define WITH_ADDRESS_SANITIZER to build an ASan-instrumented version of the
@@ -74,12 +68,6 @@ LOCAL_CFLAGS += -UNDEBUG -DDEBUG=1 -DLOG_NDEBUG=1 -DWITH_DALVIK_ASSERT \
 # TODO: split out the asflags.
 LOCAL_ASFLAGS := $(LOCAL_CFLAGS)
 LOCAL_MODULE := libdvm_assert
-ifeq ($(combo_target),TARGET_) # Workaround GCC 4.9 not being able to compile this ("internal compiler error: Segmentation fault")
-    ifeq ($(TARGET_ARCH),arm)
-        LOCAL_CC := $(TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8-linaro/bin/arm-linux-androideabi-gcc
-        LOCAL_CXX := $(TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8-linaro/bin/arm-linux-androideabi-g++
-    endif
-endif
 include $(BUILD_SHARED_LIBRARY)
 
 ifneq ($(dvm_arch),mips)    # MIPS support for self-verification is incomplete
@@ -92,12 +80,6 @@ ifneq ($(dvm_arch),mips)    # MIPS support for self-verification is incomplete
     # TODO: split out the asflags.
     LOCAL_ASFLAGS := $(LOCAL_CFLAGS)
     LOCAL_MODULE := libdvm_sv
-    ifeq ($(combo_target),TARGET_) # Workaround GCC 4.9 not being able to compile this ("internal compiler error: Segmentation fault")
-        ifeq ($(TARGET_ARCH),arm)
-            LOCAL_CC := $(TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8-linaro/bin/arm-linux-androideabi-gcc
-            LOCAL_CXX := $(TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8-linaro/bin/arm-linux-androideabi-g++
-        endif
-    endif
     include $(BUILD_SHARED_LIBRARY)
 
 endif # dvm_arch!=mips
@@ -110,12 +92,6 @@ LOCAL_CFLAGS += $(target_smp_flag)
 # TODO: split out the asflags.
 LOCAL_ASFLAGS := $(LOCAL_CFLAGS)
 LOCAL_MODULE := libdvm_interp
-ifeq ($(combo_target),TARGET_) # Workaround GCC 4.9 not being able to compile this ("internal compiler error: Segmentation fault")
-    ifeq ($(TARGET_ARCH),arm)
-        LOCAL_CC := $(TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8-linaro/bin/arm-linux-androideabi-gcc
-        LOCAL_CXX := $(TOP)/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8-linaro/bin/arm-linux-androideabi-g++
-    endif
-endif
 include $(BUILD_SHARED_LIBRARY)
 
 
